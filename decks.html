@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nollie Decks</title>
+
+<style>
+
+html{
+background:#111;
+}
+
+body{
+margin:0;
+font-family: Arial, Helvetica, sans-serif;
+background:#111;
+color:white;
+min-height:100vh;
+display:flex;
+flex-direction:column;
+}
+
+header{
+background:black;
+padding:20px;
+text-align:center;
+font-size:28px;
+letter-spacing:3px;
+}
+
+nav{
+text-align:center;
+background:#1a1a1a;
+padding:10px;
+position:relative;
+}
+
+nav a{
+color:white;
+margin:0 15px;
+text-decoration:none;
+font-size:18px;
+position:relative;
+}
+
+nav a:hover{
+color:#ff3c3c;
+}
+
+/* TOOLTIP MEJORADO */
+nav a.contacto::after{
+content:"Mándanos un DM";
+position:absolute;
+bottom:-35px;
+left:50%;
+transform:translateX(-50%) translateY(10px);
+background:#ff3c3c;
+color:white;
+padding:5px 10px;
+border-radius:5px;
+font-size:12px;
+white-space:nowrap;
+opacity:0;
+pointer-events:none;
+transition:0.3s ease, transform 0.3s ease;
+}
+
+nav a.contacto:hover::after{
+opacity:1;
+transform:translateX(-50%) translateY(0);
+}
+
+nav a.active{
+color:#ff3c3c;
+}
+
+.seccion{
+padding:100px 20px;
+text-align:center;
+}
+
+/* CONTENEDOR */
+
+.deck-container{
+position:relative;
+width:700px;
+height:350px;
+margin:auto;
+}
+
+/* DECK GENERAL */
+
+.deck{
+position:absolute;
+top:0;
+width:120px;
+transition:0.5s ease;
+}
+
+.deck-img{
+width:100%;
+transform:scaleX(-1);
+border-radius:60px;
+}
+
+/* MARCAS DE AGUA */
+
+.watermark{
+position:absolute;
+left:50%;
+transform:translateX(-50%);
+width:32px;
+opacity:0.15;
+pointer-events:none;
+}
+
+.watermark.top{
+top:8%;
+}
+
+.watermark.middle{
+top:50%;
+transform:translate(-50%,-50%);
+}
+
+.watermark.bottom{
+bottom:8%;
+}
+
+/* POSICIONES */
+
+.deck1{
+left:50%;
+transform:translateX(-50%);
+z-index:5;
+}
+
+.deck2{
+left:20%;
+z-index:2;
+}
+
+.deck3{
+right:20%;
+z-index:2;
+}
+
+.deck4{
+left:50%;
+transform:translateX(-50%);
+opacity:0;
+z-index:4;
+}
+
+.deck5{
+left:50%;
+transform:translateX(-50%);
+opacity:0;
+z-index:4;
+}
+
+/* LEVANTAR SUAVE */
+
+.deck2:hover{
+transform:translateY(-10px);
+}
+
+.deck3:hover{
+transform:translateY(-10px);
+}
+
+/* ZOOM Y SOMBRA EN TABLA CENTRAL */
+
+.deck1:hover{
+transform:translateX(-50%) scale(1.12);
+}
+
+.deck1:hover .deck-img{
+box-shadow:0 25px 40px rgba(0,0,0,0.6);
+}
+
+/* CARRUSEL */
+
+.deck1:hover ~ .deck2{
+opacity:0;
+}
+
+.deck1:hover ~ .deck3{
+opacity:0;
+}
+
+.deck1:hover ~ .deck4{
+opacity:1;
+transform:translateX(-200px);
+}
+
+.deck1:hover ~ .deck5{
+opacity:1;
+transform:translateX(80px);
+}
+
+footer{
+background:black;
+text-align:center;
+padding:20px;
+margin-top:auto;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+NOLLIE SKATEBOARDS
+</header>
+
+<nav>
+<a href="NolliePage.html">Inicio</a>
+<a href="decks.html" class="active">Decks</a>
+<a href="nosotros.html">Nosotros</a>
+<a href="https://www.instagram.com/direct/t/17850735650627151/" target="_blank" class="contacto">Contacto</a>
+</nav>
+
+<div class="seccion">
+
+<h1>DECKS</h1>
+
+<div class="deck-container">
+
+<div class="deck deck1">
+<img src="deck1.png" class="deck-img">
+<img src="NollieBorde.png" class="watermark top">
+<img src="NollieBorde.png" class="watermark middle">
+<img src="NollieBorde.png" class="watermark bottom">
+</div>
+
+<div class="deck deck2">
+<img src="deck2.png" class="deck-img">
+<img src="NollieBorde.png" class="watermark top">
+<img src="NollieBorde.png" class="watermark middle">
+<img src="NollieBorde.png" class="watermark bottom">
+</div>
+
+<div class="deck deck3">
+<img src="deck3.png" class="deck-img">
+<img src="NollieBorde.png" class="watermark top">
+<img src="NollieBorde.png" class="watermark middle">
+<img src="NollieBorde.png" class="watermark bottom">
+</div>
+
+<div class="deck deck4">
+<img src="deck4.png" class="deck-img">
+<img src="NollieBorde.png" class="watermark top">
+<img src="NollieBorde.png" class="watermark middle">
+<img src="NollieBorde.png" class="watermark bottom">
+</div>
+
+<div class="deck deck5">
+<img src="deck5.png" class="deck-img">
+<img src="NollieBorde.png" class="watermark top">
+<img src="NollieBorde.png" class="watermark middle">
+<img src="NollieBorde.png" class="watermark bottom">
+</div>
+
+</div>
+
+</div>
+
+<footer>
+© 2026 Nollie Skateboards
+</footer>
+
+</body>
+</html>
