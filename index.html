@@ -11,84 +11,169 @@
 <style>
 
 html{
-    background:#111;
+background:#111;
 }
 
 body{
-    margin:0;
-    font-family: Arial, Helvetica, sans-serif;
-    background:#111;
-    color:white;
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
+margin:0;
+font-family: Arial, Helvetica, sans-serif;
+background:#111;
+color:white;
+min-height:100vh;
+display:flex;
+flex-direction:column;
+}
+
+/* 🔥 TRANSICIÓN */
+.fade{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:black;
+z-index:9999;
+opacity:1;
+transition:0.6s;
+}
+
+.fade.hidden{
+opacity:0;
+pointer-events:none;
 }
 
 header{
-    background:black;
-    padding:20px;
-    text-align:center;
-    font-size:28px;
-    letter-spacing:3px;
+background:black;
+padding:20px;
+text-align:center;
+font-size:28px;
+letter-spacing:3px;
 }
 
 nav{
-    text-align:center;
-    background:#1a1a1a;
-    padding:10px;
+text-align:center;
+background:#1a1a1a;
+padding:10px;
 }
 
 nav a{
-    color:white;
-    margin:0 15px;
-    text-decoration:none;
-    font-size:18px;
+color:white;
+margin:0 15px;
+text-decoration:none;
+font-size:18px;
+position:relative;
 }
 
 nav a:hover{
-    color:#ff3c3c;
+color:#ff3c3c;
 }
 
-/* PAGINA ACTUAL */
-
 nav a.active{
-    color:#ff3c3c;
+color:#ff3c3c;
+}
+
+/* 🔥 CONTACTO PRO */
+
+nav a.contacto{
+position:relative;
+transition:0.3s;
+font-weight:bold;
+letter-spacing:1px;
+}
+
+/* GLOW */
+nav a.contacto:hover{
+color:#ff3c3c;
+text-shadow:0 0 5px #ff3c3c,
+            0 0 10px #ff3c3c,
+            0 0 20px #ff3c3c;
+}
+
+/* LINEA */
+nav a.contacto::before{
+content:"";
+position:absolute;
+width:0%;
+height:2px;
+bottom:-5px;
+left:50%;
+background:#ff3c3c;
+transition:0.3s;
+transform:translateX(-50%);
+box-shadow:0 0 10px #ff3c3c;
+}
+
+nav a.contacto:hover::before{
+width:100%;
+}
+
+/* TOOLTIP */
+nav a.contacto::after{
+content:"Mándanos un DM";
+position:absolute;
+bottom:-35px;
+left:50%;
+transform:translateX(-50%) translateY(10px);
+background:#ff3c3c;
+color:white;
+padding:5px 10px;
+border-radius:5px;
+font-size:12px;
+white-space:nowrap;
+opacity:0;
+pointer-events:none;
+transition:0.3s;
+}
+
+nav a.contacto:hover::after{
+opacity:1;
+transform:translateX(-50%) translateY(0);
 }
 
 .hero{
-    text-align:center;
-    padding:120px 20px;
+text-align:center;
+padding:120px 20px;
 }
 
 .logo{
-    width:450px;
-    max-width:90%;
-    display:block;
-    margin:auto;
+width:450px;
+max-width:90%;
+display:block;
+margin:auto;
 }
 
 .hero p{
-    font-family:'Great Vibes', cursive;
-    font-size:40px;
-    letter-spacing:6px;
+font-family:'Great Vibes', cursive;
+font-size:40px;
+letter-spacing:6px;
 }
 
 .seccion{
-    padding:80px 20px;
-    text-align:center;
+padding:80px 20px;
+text-align:center;
+}
+
+/* BLOQUEO IMÁGENES */
+img{
+user-select:none;
+-webkit-user-drag:none;
+pointer-events:none;
 }
 
 footer{
-    background:black;
-    text-align:center;
-    padding:20px;
-    margin-top:auto;
+background:black;
+text-align:center;
+padding:20px;
+margin-top:auto;
 }
 
 </style>
 </head>
 
 <body>
+
+<!-- 🔥 TRANSICIÓN -->
+<div class="fade"></div>
 
 <header>
 NOLLIE SKATEBOARDS
@@ -98,7 +183,7 @@ NOLLIE SKATEBOARDS
 <a href="index.html" class="active">Inicio</a>
 <a href="decks.html">Decks</a>
 <a href="nosotros.html">Nosotros</a>
-<a href="https://www.instagram.com/direct/t/17850735650627151/">Contacto</a>
+<a href="https://www.instagram.com/direct/t/17850735650627151/" target="_blank" class="contacto">Contacto</a>
 </nav>
 
 <div class="hero">
@@ -114,6 +199,46 @@ NOLLIE SKATEBOARDS
 <footer>
 © 2026 Nollie Skateboards
 </footer>
+
+<script>
+
+/* 🔥 TRANSICIÓN */
+window.onload=()=>document.querySelector(".fade").classList.add("hidden");
+
+document.querySelectorAll("a").forEach(link=>{
+if(!link.href.includes("instagram")){
+link.addEventListener("click",function(e){
+e.preventDefault();
+let url=this.href;
+document.querySelector(".fade").classList.remove("hidden");
+setTimeout(()=>window.location=url,500);
+});
+}
+});
+
+/* 🔒 PROTECCIÓN */
+document.addEventListener("contextmenu", e => e.preventDefault());
+document.addEventListener("dragstart", e => e.preventDefault());
+document.addEventListener("selectstart", e => e.preventDefault());
+
+document.addEventListener("keydown", function(e){
+if(e.key==="F12") e.preventDefault();
+if(e.ctrlKey && e.shiftKey && e.key==="I") e.preventDefault();
+if(e.ctrlKey && e.key==="u") e.preventDefault();
+if(e.ctrlKey && e.key==="s") e.preventDefault();
+});
+
+/* ANTI INSPECT */
+setInterval(()=>{
+let w = window.outerWidth - window.innerWidth;
+let h = window.outerHeight - window.innerHeight;
+
+if(w>160 || h>160){
+document.body.innerHTML="";
+}
+},1000);
+
+</script>
 
 </body>
 </html>
